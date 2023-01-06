@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class NumberConverter {
     int[] digits;
     int base;
@@ -27,7 +29,28 @@ public class NumberConverter {
     }
 
     public int[] convertToDecimal() {
-        return null;
+        int decimalValue = 0;
+        if (base == 2) {
+            for (int i = digits.length - 1; i >= 0; i--) {
+
+            }
+        }
+        if (base == 8) {
+            int power = 1;
+            for (int i = digits.length - 1; i >= 0; i--) {
+                decimalValue = decimalValue + (power * digits[i]);
+                power = power * 8;
+            }
+        }
+
+        String numberAsString = Integer.toString(decimalValue);
+        digits = new int[numberAsString.length()];
+        for (int i = 0; i < numberAsString.length(); i++) {
+            String single = numberAsString.substring(i,i+1);
+            int d = Integer.parseInt(single);
+            digits[i] = d;
+        }
+      return digits;
     }
 
     public int[] convertToBinary() {
