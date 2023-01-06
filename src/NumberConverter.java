@@ -31,8 +31,12 @@ public class NumberConverter {
     public int[] convertToDecimal() {
         int decimalValue = 0;
         if (base == 2) {
+            int power = 1;
             for (int i = digits.length - 1; i >= 0; i--) {
-
+                if (digits[i] == 1) {
+                    decimalValue = decimalValue + (power * digits[i]);
+                    power = power * 2;
+                }
             }
         }
         if (base == 8) {
