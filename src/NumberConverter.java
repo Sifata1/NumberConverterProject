@@ -63,7 +63,7 @@ public class NumberConverter {
 
         String binary = "";
         int[] decDigits = digits;
-        int decDigit = Integer.valueOf(o);
+        int decDigit = Integer.parseInt(o);
 
         if (base == 8) {
             decDigits = convertToDecimal();
@@ -75,12 +75,11 @@ public class NumberConverter {
                 if (decDigit % Math.pow(2, power) == 0) {
                     binary+= "1";
                     decDigit -= subtract;
-                    power++;
                 } else {
                     binary+= "0";
-                    power++;
                 }
-            }
+            power++;
+        }
 
         int b = Integer.parseInt(binary);
         return b;
