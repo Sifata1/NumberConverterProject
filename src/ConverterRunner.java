@@ -22,5 +22,6 @@ class ConverterRunner {
         System.out.println("\n\nDigit array: " + Arrays.toString(digits));
         System.out.println("Number: " + nc.displayOriginalNumber());
         System.out.println("Decimal: " + Arrays.toString(nc.convertToDecimal()));
+        System.out.print("Binary: " + nc.convertToBinary());
     }
 }
