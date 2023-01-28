@@ -28,65 +28,44 @@ public class NumberConverter {
         return digits;
     }
 
-    public int[] convertToDecimal() {
+    public int convertToDecimal() {
         int decimalValue = 0;
-        if (base == 2) {
-            int power = 1;
-            for (int i = digits.length - 1; i >= 0; i--) {
-                decimalValue = decimalValue + (power * digits[i]);
-                power = power * 2;
-            }
+        int power = 1;
+        for (int i = digits.length - 1; i >= 0; i--) {
+            decimalValue += digits[i] * power;
+            power *= base;
         }
-        if (base == 8) {
-            int power = 1;
-            for (int i = digits.length - 1; i >= 0; i--) {
-                decimalValue = decimalValue + (power * digits[i]);
-                power = power * 8;
-            }
-        }
-
-        String numberAsString = Integer.toString(decimalValue);
-        digits = new int[numberAsString.length()];
-        for (int i = 0; i < numberAsString.length(); i++) {
-            String single = numberAsString.substring(i,i+1);
-            int d = Integer.parseInt(single);
-            digits[i] = d;
-        }
-      return digits;
+        return decimalValue;
     }
 
-    public int convertToBinary() {
-        String o = "";
+    public String convertToBinary() {
+        int decimal = 0;
         for (int i = 0; i < digits.length; i++) {
-            o = o + digits[i];
+            decimal = decimal * base + digits[i];
         }
 
         String binary = "";
-        int[] decDigits = digits;
-        int decDigit = Integer.parseInt(o);
-
-        if (base == 8) {
-            decDigits = convertToDecimal();
+        while (decimal > 0) {
+            int remainder = decimal % 2;
+            binary = remainder + binary;
+            decimal = decimal / 2;
         }
-
-        int power = 0;
-        for (int i = digits.length - 1; i > decDigits.length; i++) {
-                int subtract = (int) Math.pow(decDigit,i);
-                if (decDigit % Math.pow(2, power) == 0) {
-                    binary+= "1";
-                    decDigit -= subtract;
-                } else {
-                    binary+= "0";
-                }
-            power++;
-        }
-
-        int b = Integer.parseInt(binary);
-        return b;
+        return binary;
     }
 
-    public int[] convertToOctal() {
-        return null;
+    public String convertToOctal() {
+        int decimal = 0;
+        for (int i = 0; i < digits.length; i++) {
+            decimal = decimal * base + digits[i];
+        }
+
+        String octal = "";
+        while (decimal > 0) {
+            int remainder = decimal % 8;
+            octal = remainder + octal;
+            decimal = decimal / 8;
+        }
+        return octal;
     }
 
     public static boolean checkInputs(int base, int num){
