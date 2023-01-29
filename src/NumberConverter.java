@@ -8,7 +8,7 @@ public class NumberConverter {
         String numberAsString = Integer.toString(number);
         digits = new int[numberAsString.length()];
         for (int i = 0; i < numberAsString.length(); i++) {
-            String single = numberAsString.substring(i,i+1);
+            String single = numberAsString.substring(i, i + 1);
             int d = Integer.parseInt(single);
             digits[i] = d;
         }
@@ -68,15 +68,14 @@ public class NumberConverter {
         return octal;
     }
 
-    public static String convertDecimalToBaseX(int decimal, int base){
+    public static String convertDecimalToBaseX(int decimal, int base) {
         String baseXValue = "";
-        if (base == 1){
-            for (int i = 0; i < decimal; i++){
+        if (base == 1) {
+            for (int i = 0; i < decimal; i++) {
                 baseXValue += "1";
             }
             return baseXValue;
-        }
-        else if (decimal == 0) return "0";
+        } else if (decimal == 0) return "0";
         String values = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+/";
         // finding the highest power of base X that can go into decimal:
         int power = 0;
@@ -84,7 +83,7 @@ public class NumberConverter {
         if (decimal - Math.pow(base, power) < 0) power--;
         // adding the characters to baseXValue:
         int quotient;
-        while (power >= 0){
+        while (power >= 0) {
             quotient = decimal / (int) Math.pow(base, power);
             baseXValue += values.substring(quotient, quotient + 1);
             decimal -= Math.pow(base, power) * quotient;
@@ -93,21 +92,20 @@ public class NumberConverter {
         return baseXValue;
     }
 
-
-    public static boolean checkInputs(int base, int num){
-        String number = num + "";
-        if (base == 2){
-            for (int i = 0; i < number.length(); i++){
-                String currentChar = number.charAt(i) + "";
-                if (!(currentChar.equals("1") || currentChar.equals("0"))) return false;
-            }
+    public static boolean checkInputs(int base, String num){
+        String v = "0123456789ABCDEF";
+        String b = v.substring(0, base);
+        String[] numberList = new String[num.length()];
+        for (int i = 0; i < numberList.length; i++){
+            numberList[i] = num.substring(i, i + 1);
         }
-        if (base == 8){
-            for (int i = 0; i < number.length(); i++){
-                if (number.charAt(i) > '7') return false; // changed from '8' to '7'
+        for (String number : numberList){
+            if (b.indexOf(number) == -1) {
+                return false;
             }
         }
         return true;
     }
+
 
 }

@@ -5,7 +5,7 @@ class ConverterRunner {
     public static void main(String[] args) {
         System.out.println("Welcome to the Number Converter!");
         System.out.println("--------------------------------");
-        System.out.print("Enter the base of your number (2, 8 or 10): ");
+        System.out.print("Enter the base of your number (2, 8, 10 or 16): ");
 
         Scanner s = new Scanner(System.in);
         String choice = s.nextLine();
@@ -24,5 +24,6 @@ class ConverterRunner {
         System.out.println("Decimal: " + nc.convertToDecimal());
         System.out.println("Binary: " + nc.convertToBinary());
         System.out.println("Octal: " + nc.convertToOctal());
+        System.out.println("Hexadecimal: " +nc.convertDecimalToBaseX(nc.convertToDecimal(), 16) );
     }
 }
