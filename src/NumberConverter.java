@@ -92,6 +92,16 @@ public class NumberConverter {
         return baseXValue;
     }
 
+    public static boolean numIsInRange(int min, int max, String num){
+        String numbers = "1234567890";
+        for (int i = 0; i < num.length(); i++){
+            if (numbers.indexOf(num.substring(i, i + 1)) == -1) return false;
+        }
+        if (Integer.parseInt(num) > max) return false;
+        else if (Integer.parseInt(num) < min) return false;
+        return true;
+    }
+
     public static boolean checkInputs(int base, String num){
         String v = "0123456789ABCDEF";
         String b = v.substring(0, base);
@@ -109,3 +119,5 @@ public class NumberConverter {
 
 
 }
+
+
