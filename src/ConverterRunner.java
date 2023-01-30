@@ -18,7 +18,7 @@ class ConverterRunner {
 
         int base2 = Integer.parseInt(base);
 
-        if (base2 == 2 || base2 == 8 || base2 == 16) {
+        if (base2 == 2 || base2 == 8 || base2 == 10) {
             System.out.print("Enter your number: ");
             String number = s.nextLine();
             int n = Integer.parseInt(number);
@@ -28,8 +28,6 @@ class ConverterRunner {
                 System.out.print("Please enter another number: ");
                 number = s.nextLine();
             }
-
-            s.close();
 
             NumberConverter nc = new NumberConverter(n, base2);
             int[] digits = nc.getDigits();
@@ -43,5 +41,28 @@ class ConverterRunner {
         } else {
 
         }
+
+        System.out.println("");
+        System.out.println("Would you like to convert a decimal number to any base within 1-64? Enter 1 for yes or 2 for no:");
+
+
+        String answer = s.nextLine();
+
+        if (answer.equals("1")) {
+            System.out.print("Enter your number: ");
+            String n = s.nextLine();
+            while (NumberConverter.checkInputs(10,n) == false){
+                System.out.print("Please enter a decimal number: ");
+                n = s.nextLine();
+            }
+            System.out.print("Enter the base you would like to convert to (1 - 64): ");
+            String base3 = s.nextLine();
+            while (NumberConverter.numIsInRange(1, 64, base3) == false){
+                System.out.print("Please enter a number from 1 - 64: ");
+                base3 = s.nextLine();
+            }
+            System.out.println(NumberConverter.convertDecimalToBaseX(Integer.parseInt(n),Integer.parseInt(base3)));
+        }
     }
+
 }
