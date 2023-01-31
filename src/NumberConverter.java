@@ -40,51 +40,87 @@ public class NumberConverter {
         return digits;
     }
 
+    public static String listToString(String[] list){
+        String numAsString = "";
+        for (int i = 0; i < list.length; i++){
+            numAsString += list[i];
+        }
+        return numAsString;
+    }
+
+    public static String[] stringToList(String string){
+        String[] list = new String[string.length()];
+        for (int i = 0; i < string.length(); i++){
+            String num = string.charAt(i) + "";
+            list[i] = num;
+        }
+        return list;
+    }
+
     /**
      * Converts the original number from any base to decimal.
      * @return the decimal value of the original number
      */
-    public int convertToDecimal() {
+    public String[] convertToDecimal() {
+        String[] newDigits;
+        String values = "0123456789ABCDEF";
         int decimalValue = 0;
-        int power = 1;
-        for (int i = digits.length - 1; i >= 0; i--) {
-            int digitValue = Integer.parseInt(digits[i], base);
-            decimalValue += digitValue * power;
-            power *= base;
+        int digitValue, power;
+        for (int i = 0; i < digits.length; i++){
+            digitValue = values.indexOf(digits[i]);
+            power = digits.length - i - 1;
+            decimalValue += digitValue * (int) Math.pow(base, power);
         }
-        return decimalValue;
+        String numberAsString = decimalValue + "";
+        newDigits = stringToList(numberAsString);
+        return newDigits;
     }
 
     /**
      * Converts the original number from any base to binary.
      * @return the binary value of the original number
      */
-    public String convertToBinary() {
-        int decimal = convertToDecimal();
-
-        String binary = "";
-        while (decimal > 0) {
-            int remainder = decimal % 2;
-            binary = remainder + binary;
-            decimal = decimal / 2;
+    public String[] convertToBinary() {
+        String[] newDigits;
+        String values = "0123456789ABCDEF";
+        String binaryValue = "";
+        int decimalValue = 0;
+        int digitValue;
+        int power;
+        for (int i = 0; i < digits.length; i++) {
+            digitValue = values.indexOf(digits[i]);
+            power = digits.length - i - 1;
+            decimalValue += digitValue * (int) Math.pow(base, power);
         }
-        return binary;
+        while (decimalValue > 0) {
+            binaryValue = (decimalValue % 2) + binaryValue;
+            decimalValue = decimalValue / 2;
+        }
+        newDigits = stringToList(binaryValue);
+        return newDigits;
     }
 
     /**
      * Converts the original number from any base to octal.
      * @return the octal value of the original number
      */
-    public String convertToOctal() {
-        int decimal = convertToDecimal();
-
-        String octal = "";
-        while (decimal > 0) {
-            int remainder = decimal % 8;
-            octal = remainder + octal;
-            decimal = decimal / 8;
+    public String[] convertToOctal() {
+        String[] newDigits;
+        String values = "0123456789ABCDEF";
+        String octalValue = "";
+        int decimalValue = 0;
+        int digitValue, power;
+        for (int i = 0; i < digits.length; i++) {
+            digitValue = values.indexOf(digits[i]);
+            power = digits.length - i - 1;
+            decimalValue += digitValue * (int) Math.pow(base, power);
         }
-        return octal;
+        while (decimalValue > 0) {
+            octalValue = (decimalValue % 8) + octalValue;
+            decimalValue = decimalValue / 8;
+        }
+        newDigits = stringToList(octalValue);
+        return newDigits;
     }
 
     /**
@@ -93,7 +129,7 @@ public class NumberConverter {
      * @param base the base the user wants to convert to
      * @return
      */
-    public static String convertDecimalToBaseX(int decimal, int base) {
+    public static String decToAllBases(int decimal, int base) {
         String baseXValue = "";
         if (base == 1) {
             for (int i = 0; i < decimal; i++) {
@@ -118,23 +154,21 @@ public class NumberConverter {
     }
 
     public static boolean numIsInRange(int min, int max, String num){
+        int num2 = Integer.parseInt(num);
         String numbers = "1234567890";
         for (int i = 0; i < num.length(); i++){
             if (numbers.indexOf(num.substring(i, i + 1)) == -1) return false;
         }
-        if (Integer.parseInt(num) > max) return false;
-        else if (Integer.parseInt(num) < min) return false;
+        if (num2 > max) return false;
+        else if (num2 < min) return false;
         return true;
     }
 
     public static boolean checkInputs(int base, String num){
         String v = "0123456789ABCDEF";
         String b = v.substring(0, base);
-        String[] numberList = new String[num.length()];
-        for (int i = 0; i < numberList.length; i++){
-            numberList[i] = num.substring(i, i + 1);
-        }
-        for (String number : numberList){
+        for (int i = 0; i < num.length(); i++){
+            char number = num.charAt(i);
             if (b.indexOf(number) == -1) {
                 return false;
             }
@@ -142,6 +176,16 @@ public class NumberConverter {
         return true;
     }
 
+    public String toString() {
+        String s ="\n\nDigit array: " + Arrays.toString(digits) + "\n";
+        s+="Original Number: " + displayOriginalNumber() ;
+        if (base != 10) s+= "Decimal: " + decToAllBases(Integer.parseInt(listToString(convertToDecimal())), 10) + "\n";
+        if (base != 2) s+= "Binary: " + decToAllBases(Integer.parseInt(listToString(convertToDecimal())), 2) + "\n";
+        if (base != 8) s+= "Octal: " + decToAllBases(Integer.parseInt(listToString(convertToDecimal())), 8) + "\n";
+        if (base != 16) s+= "Hexadecimal: " +decToAllBases(Integer.parseInt(listToString(convertToDecimal())), 16);
+        return s;
+
+    }
 
 }
 

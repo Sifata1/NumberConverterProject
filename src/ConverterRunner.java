@@ -30,19 +30,12 @@ import java.util.Arrays;
 
             NumberConverter nc = new NumberConverter(number, base2);
             String[] digits = nc.getDigits();
-            System.out.println("\n\nDigit array: " + Arrays.toString(digits));
-            System.out.println("Number: " + nc.displayOriginalNumber());
-            if (base2 != 10) System.out.println("Decimal: " + nc.convertToDecimal());
-            if (base2 != 2) System.out.println("Binary: " + nc.convertToBinary());
-            if (base2 != 8) System.out.println("Octal: " + nc.convertToOctal());
-            if (base2 != 16) System.out.println("Hexadecimal: " +nc.convertDecimalToBaseX(nc.convertToDecimal(), 16) );
+            System.out.println(nc.toString());
 
         }
 
         System.out.println("");
-        System.out.println("Would you like to convert a decimal number to any base within 1-64? Enter 1 for yes or 2 for no:");
-
-
+        System.out.println("Would you like to convert a decimal number to any base within 1-64? Enter 1 for YES or 2 for NO:");
         String answer = s.nextLine();
 
         if (answer.equals("1")) {
@@ -58,7 +51,7 @@ import java.util.Arrays;
                 System.out.print("Please enter a number from 1 - 64: ");
                 base3 = s.nextLine();
             }
-            System.out.println(NumberConverter.convertDecimalToBaseX(Integer.parseInt(n),Integer.parseInt(base3)));
+            System.out.println(NumberConverter.decToAllBases(Integer.parseInt(n),Integer.parseInt(base3)));
         }
     }
 
