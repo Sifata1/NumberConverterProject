@@ -18,10 +18,9 @@ class ConverterRunner {
 
         int base2 = Integer.parseInt(base);
 
-        if (base2 == 2 || base2 == 8 || base2 == 10) {
+        if (base2 == 2 || base2 == 8 || base2 == 10 || base2 == 16) {
             System.out.print("Enter your number: ");
             String number = s.nextLine();
-            int n = Integer.parseInt(number);
 
             while (NumberConverter.checkInputs(base2, number) == false){
                 System.out.println(number + " does not work for base " + base);
@@ -29,16 +28,14 @@ class ConverterRunner {
                 number = s.nextLine();
             }
 
-            NumberConverter nc = new NumberConverter(n, base2);
-            int[] digits = nc.getDigits();
+            NumberConverter nc = new NumberConverter(number, base2);
+            String[] digits = nc.getDigits();
             System.out.println("\n\nDigit array: " + Arrays.toString(digits));
             System.out.println("Number: " + nc.displayOriginalNumber());
             if (base2 != 10) System.out.println("Decimal: " + nc.convertToDecimal());
             if (base2 != 2) System.out.println("Binary: " + nc.convertToBinary());
             if (base2 != 8) System.out.println("Octal: " + nc.convertToOctal());
             if (base2 != 16) System.out.println("Hexadecimal: " +nc.convertDecimalToBaseX(nc.convertToDecimal(), 16) );
-
-        } else {
 
         }
 

@@ -1,15 +1,13 @@
 import java.util.Arrays;
 
 public class NumberConverter {
-    int[] digits;
+    String[] digits;
     int base;
 
-    public NumberConverter(int number, int base) {
-        String numberAsString = Integer.toString(number);
-        digits = new int[numberAsString.length()];
-        for (int i = 0; i < numberAsString.length(); i++) {
-            String single = numberAsString.substring(i, i + 1);
-            int d = Integer.parseInt(single);
+    public NumberConverter(String number, int base) {
+        digits = new String[number.length()];
+        for (int i = 0; i < number.length(); i++) {
+            String d = number.substring(i, i + 1);
             digits[i] = d;
         }
         this.base = base;
@@ -24,7 +22,7 @@ public class NumberConverter {
         return o;
     }
 
-    public int[] getDigits() {
+    public String[] getDigits() {
         return digits;
     }
 
@@ -32,17 +30,15 @@ public class NumberConverter {
         int decimalValue = 0;
         int power = 1;
         for (int i = digits.length - 1; i >= 0; i--) {
-            decimalValue += digits[i] * power;
+            int digitValue = Integer.parseInt(digits[i], base);
+            decimalValue += digitValue * power;
             power *= base;
         }
         return decimalValue;
     }
 
     public String convertToBinary() {
-        int decimal = 0;
-        for (int i = 0; i < digits.length; i++) {
-            decimal = decimal * base + digits[i];
-        }
+        int decimal = convertToDecimal();
 
         String binary = "";
         while (decimal > 0) {
@@ -54,10 +50,7 @@ public class NumberConverter {
     }
 
     public String convertToOctal() {
-        int decimal = 0;
-        for (int i = 0; i < digits.length; i++) {
-            decimal = decimal * base + digits[i];
-        }
+        int decimal = convertToDecimal();
 
         String octal = "";
         while (decimal > 0) {
