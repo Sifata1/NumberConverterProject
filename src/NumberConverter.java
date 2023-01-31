@@ -40,6 +40,11 @@ public class NumberConverter {
         return digits;
     }
 
+    /**
+     * Turns the list of the digits into a string
+     * @param list the string list of the digits
+     * @return Returns the num as a string
+     */
     public static String listToString(String[] list){
         String numAsString = "";
         for (int i = 0; i < list.length; i++){
@@ -48,6 +53,11 @@ public class NumberConverter {
         return numAsString;
     }
 
+    /**
+     * Turns the string of digits/letters into a list with each digit.
+     * @param string the string representation of the number
+     * @return Returns the number as a list
+     */
     public static String[] stringToList(String string){
         String[] list = new String[string.length()];
         for (int i = 0; i < string.length(); i++){
@@ -127,7 +137,7 @@ public class NumberConverter {
      * Converts the given decimal value to the
      * @param decimal the given decimal number the user wants to convert
      * @param base the base the user wants to convert to
-     * @return
+     * @return Returns the conversion from the decimal value to the given base
      */
     public static String decToAllBases(int decimal, int base) {
         String baseXValue = "";
@@ -153,6 +163,14 @@ public class NumberConverter {
         return baseXValue;
     }
 
+    /**
+     *
+     * @param min The minimum base the user can input
+     * @param max The maximum base the user can input
+     * @param num The string representation of the base inputted by the user
+     * @return Returns true if the base is within the min-max, returns false if not
+     */
+
     public static boolean numIsInRange(int min, int max, String num){
         int num2 = Integer.parseInt(num);
         String numbers = "1234567890";
@@ -164,6 +182,12 @@ public class NumberConverter {
         return true;
     }
 
+    /**
+     * Checks to see if the number inputted
+     * @param base the base inputted by the user
+     * @param num the string representation of the number inputted by the user
+     * @return Returns true if the number inputted by the user corresponds with the base, returns false if not
+     */
     public static boolean checkInputs(int base, String num){
         String v = "0123456789ABCDEF";
         String b = v.substring(0, base);
@@ -176,6 +200,9 @@ public class NumberConverter {
         return true;
     }
 
+    /**
+     * @return Returns a string with all the conversions along with the original number.
+     */
     public String toString() {
         String s ="\n\nDigit array: " + Arrays.toString(digits) + "\n";
         s+="Original Number: " + displayOriginalNumber() ;
