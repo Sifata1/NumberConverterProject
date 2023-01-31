@@ -1,9 +1,15 @@
 import java.util.Arrays;
 
 public class NumberConverter {
-    String[] digits;
-    int base;
+    private String[] digits;
+    private int base;
 
+    // CONSTRUCTOR
+    /**
+     *
+     * @param number is the string representation of the number given by the user.
+     * @param base the base of the number the user inputted.
+     */
     public NumberConverter(String number, int base) {
         digits = new String[number.length()];
         for (int i = 0; i < number.length(); i++) {
@@ -13,6 +19,11 @@ public class NumberConverter {
         this.base = base;
     }
 
+    // METHODS
+    /**
+     * Displays the string representation of the original number not as a list.
+     * @return a String that contains the original number.
+     */
     public String displayOriginalNumber() {
         String o = "";
         for (int i = 0; i < digits.length; i++) {
@@ -22,10 +33,17 @@ public class NumberConverter {
         return o;
     }
 
+    /**
+     * @return Returns an array of the digits in the original number.
+     */
     public String[] getDigits() {
         return digits;
     }
 
+    /**
+     * Converts the original number from any base to decimal.
+     * @return the decimal value of the original number
+     */
     public int convertToDecimal() {
         int decimalValue = 0;
         int power = 1;
@@ -37,6 +55,10 @@ public class NumberConverter {
         return decimalValue;
     }
 
+    /**
+     * Converts the original number from any base to binary.
+     * @return the binary value of the original number
+     */
     public String convertToBinary() {
         int decimal = convertToDecimal();
 
@@ -49,6 +71,10 @@ public class NumberConverter {
         return binary;
     }
 
+    /**
+     * Converts the original number from any base to octal.
+     * @return the octal value of the original number
+     */
     public String convertToOctal() {
         int decimal = convertToDecimal();
 
@@ -61,6 +87,12 @@ public class NumberConverter {
         return octal;
     }
 
+    /**
+     * Converts the given decimal value to the
+     * @param decimal the given decimal number the user wants to convert
+     * @param base the base the user wants to convert to
+     * @return
+     */
     public static String convertDecimalToBaseX(int decimal, int base) {
         String baseXValue = "";
         if (base == 1) {
