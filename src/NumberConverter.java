@@ -140,27 +140,33 @@ public class NumberConverter {
      * @return Returns the conversion from the decimal value to the given base
      */
     public static String decToAllBases(int decimal, int base) {
-        String baseXValue = "";
-        if (base == 1) {
+        String value = "";
+        String v = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+/";
+        if (decimal == 0) {
+            return "0";
+        } else if (base == 1) {
             for (int i = 0; i < decimal; i++) {
-                baseXValue += "1";
+                value += "1";
             }
-            return baseXValue;
-        } else if (decimal == 0) return "0";
-        String values = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz+/";
-        // finding the highest power of base X that can go into decimal:
-        int power = 0;
-        while (decimal - Math.pow(base, power) >= 0) power++;
-        if (decimal - Math.pow(base, power) < 0) power--;
-        // adding the characters to baseXValue:
-        int quotient;
-        while (power >= 0) {
-            quotient = decimal / (int) Math.pow(base, power);
-            baseXValue += values.substring(quotient, quotient + 1);
-            decimal -= Math.pow(base, power) * quotient;
-            power--;
+            return value;
+        } else {
+            int power = 0;
+            while (decimal - Math.pow(base, power) >= 0) {
+                power++;
+            }
+            if (decimal - Math.pow(base, power) < 0) {
+                power--;
+            }
+            int quotient = 0;
+            while (power >= 0) {
+                quotient = decimal / (int) Math.pow(base, power);
+                value += v.substring(quotient, quotient + 1);
+                decimal -= Math.pow(base, power) * quotient;
+                power--;
+            }
+            return value;
         }
-        return baseXValue;
+
     }
 
     /**
@@ -215,5 +221,3 @@ public class NumberConverter {
     }
 
 }
-
-
